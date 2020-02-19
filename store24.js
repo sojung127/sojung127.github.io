@@ -353,8 +353,8 @@ class Store24 extends Phaser.Scene {
         if(this.score%100==0){
             if(this.speed<0.5){
                 var temp=this.score/100;
-                this.speed=this.speed+temp*0.0002 //speed 클수록 빠름
-                this.상품간격= this.상품간격*temp*0.00001;  //상품나오는 delay 작을수록 좋음
+                this.speed=this.speed+temp*0.0002; //speed 클수록 빠름
+                this.상품간격= this.상품간격-1000;  //상품나오는 delay 작을수록 좋음
             }
         }
 
