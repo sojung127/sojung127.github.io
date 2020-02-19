@@ -83,7 +83,8 @@ class Pizza extends Phaser.Scene {
         this.load.image('게임끝팝업','assets/pizza/피자_게임끝.png');
         this.load.image('ok','assets/공통팝업창/확인버튼.png');
 
-        this.load.image('aa','assets/pizza/cc.png')
+        this.load.image('dd','assets/pizza/dd.png');
+        this.load.image('aa','assets/pizza/cc.png');
         this.load.image('타임바','assets/pizza/타임바1.png');
         this.load.image('타임바_위','assets/pizza/타임바2.png');
         this.load.image('타임바_아래','assets/pizza/타임바3.png');
@@ -116,6 +117,7 @@ class Pizza extends Phaser.Scene {
             }
         }
 
+        this.add.image(400,256,'dd').setScale(1.3,1.3);
         this.timerEvent = this.time.addEvent({ delay: 30000 });
         this.graphics = this.add.graphics({ x: 20, y: 430 });
         this.graphics.angle = -90;
