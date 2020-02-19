@@ -1,6 +1,6 @@
   
 //공통변수
-date=30; //30일부터 1일 까지 0이면 게임 엔딩
+date=10; //30일부터 1일 까지 0이면 게임 엔딩
 joy=5; //즐거움 1~10일 까지 0이면 게임 오버
 money=50000; //돈 10000원에서 시작 0이면 게임 오버 -> 1초당 1000원씩 감소
 ending=0; //ending이 1이면 게임오버, ending이 2이면 엔딩씬
@@ -71,13 +71,13 @@ class Main extends Phaser.Scene{
     {  
         this.pause=false;
         if(joy<=2){
-            music=this.sound.add('메인게임나쁨bgm','assets/music/메인게임나쁨bgm.mp3');
+            music=this.sound.add('메인게임나쁨bgm','/assets/music/메인게임나쁨bgm.mp3');
         }
         if(joy>=8){
-            music=this.sound.add('메인게임좋음bgm','assets/music/메인게임좋음bgm.mp3');
+            music=this.sound.add('메인게임좋음bgm','/assets/music/메인게임좋음bgm.mp3');
         }
         if(joy>=3 && joy<=7){
-            music=this.sound.add('메인게임보통bgm','assets/music/메인게임보통bgm.mp3');
+            music=this.sound.add('메인게임보통bgm','/assets/music/메인게임보통bgm.mp3');
         }
         this.sound.loop=true;
         this.sound.mute=false;
@@ -164,7 +164,7 @@ class Main extends Phaser.Scene{
             music.stop();
             if (this.whichGame==1){
                 this.런닝방법.visible=false;
-                music=this.sound.add('런닝런닝bgm','assets/music/런닝런닝bgm.mp3');
+                music=this.sound.add('런닝런닝bgm','/assets/music/런닝런닝bgm.mp3');
                 this.sound.loop=true;
                 this.sound.mute=false;
                 music.play();
@@ -175,7 +175,7 @@ class Main extends Phaser.Scene{
             }
             else if (this.whichGame==2){
                 this.블랙잭방법.visible=false;
-                music=this.sound.add('블랙잭bgm','assets/music/블랙잭bgm.mp3');
+                music=this.sound.add('블랙잭bgm','/assets/music/블랙잭bgm.mp3');
                 this.sound.loop=true;
                 this.sound.mute=false;
                 music.play();
@@ -186,7 +186,7 @@ class Main extends Phaser.Scene{
             }
             else if (this.whichGame==3){
                 this.피자방법.visible=false;
-                music=this.sound.add('피자나라bgm','assets/music/피자나라bgm.mp3');
+                music=this.sound.add('피자나라bgm','/assets/music/피자나라bgm.mp3');
                 this.sound.loop=true;
                 this.sound.mute=false;
                 music.play();
@@ -196,7 +196,7 @@ class Main extends Phaser.Scene{
             }
             else if (this.whichGame==4){
                 this.편순이방법.visible=false;
-                music=this.sound.add('편의점bgm','assets/music/편의점bgm.mp3');
+                music=this.sound.add('편의점bgm','/assets/music/편의점bgm.mp3');
                 this.sound.loop=true;
                 this.sound.mute=false;
                 music.play();
@@ -382,11 +382,17 @@ class Main extends Phaser.Scene{
                 this.덤불그룹.create(544 + i * 64, 352, this.덤불[this.randomGrass()]);
             }
             this.덤불그룹.create(608, 160, this.덤불[this.randomGrass()]);
-            this.덤불그룹.create(480, 224, this.덤불[this.randomGrass()]);
+            //this.덤불그룹.create(480, 224, this.덤불[this.randomGrass()]);
             this.덤불그룹.create(224, 352, this.덤불[this.randomGrass()]);
             this.덤불그룹.create(352, 416, this.덤불[this.randomGrass()]);
             this.덤불그룹.create(224, 160, this.덤불[this.randomGrass()]);
-
+            
+            this.덤불그룹.create(672,192+32-64,this.덤불[this.randomGrass()]);
+            this.덤불그룹.create(224,288,this.덤불[this.randomGrass()]);
+            this.덤불그룹.create(608-64-64-64,192+32,this.덤불[this.randomGrass()]);
+            this.덤불그룹.create(320+32,192+32,this.덤불[this.randomGrass()]);
+            this.덤불그룹.create(416,160,this.덤불[this.randomGrass()]);
+            this.덤불그룹.create(672,224,this.덤불[this.randomGrass()]);
         }
         this.flag = false;
 
@@ -643,8 +649,8 @@ class GameOver extends Phaser.Scene {
 
     }
     preload() {
-        //this.load.image('popup','assets/ending/endingPopUp.PNG')
-        //this.load.image('title','assets/ending/gameOverTitle.PNG')
+        //this.load.image('popup','assets/ending/endingPopUp.png')
+        //this.load.image('title','assets/ending/gameOverTitle.png')
 
         //게임오버
         this.load.image('즐거움게임오버','/assets/ending/즐거움게임오버.png');
@@ -723,7 +729,7 @@ class Preloader extends Phaser.Scene{
 			key: 'Preloader',
 			pack: {
 			    files: [
-			        { type: 'image', key: 'nowloading', url: 'assets/main/로딩중.png' }
+			        { type: 'image', key: 'nowloading', url: '/assets/main/로딩중.png' }
 			    ]
 			}
 		});
@@ -736,58 +742,58 @@ class Preloader extends Phaser.Scene{
 		
 		// load all assets
 		//BGM
-        this.load.audio('메인게임보통bgm','assets/music/메인게임보통bgm.mp3');
-        this.load.audio('메인게임좋음bgm','assets/music/메인게임좋음bgm.mp3');
-        this.load.audio('메인게임나쁨bgm','assets/music/메인게임나쁨bgm.mp3');
-        this.load.audio('피자나라bgm','assets/music/피자나라bgm.mp3');
-        this.load.audio('런닝런닝bgm','assets/music/런닝런닝bgm.mp3');
-        this.load.audio('블랙잭bgm','assets/music/블랙잭bgm.mp3');
-        this.load.audio('편의점bgm','assets/music/편의점bgm.mp3');
+        this.load.audio('메인게임보통bgm','/assets/music/메인게임보통bgm.mp3');
+        this.load.audio('메인게임좋음bgm','/assets/music/메인게임좋음bgm.mp3');
+        this.load.audio('메인게임나쁨bgm','/assets/music/메인게임나쁨bgm.mp3');
+        this.load.audio('피자나라bgm','/assets/music/피자나라bgm.mp3');
+        this.load.audio('런닝런닝bgm','/assets/music/런닝런닝bgm.mp3');
+        this.load.audio('블랙잭bgm','/assets/music/블랙잭bgm.mp3');
+        this.load.audio('편의점bgm','/assets/music/편의점bgm.mp3');
 
         //메인게임 날짜, 즐거움, 돈 _ 왼쪽 바
-        this.load.image('머니바','assets/main/money_bar.png')
-        this.load.image('왼쪽바', 'assets/main/메인게임UI왼쪽바.png');
+        this.load.image('머니바','/assets/main/money_bar.png')
+        this.load.image('왼쪽바', '/assets/main/메인게임UI왼쪽바.png');
 
 
-        this.load.image('blackjack', 'assets/blackjack/cardA.png');
-        this.load.image('pizza', 'assets/pizza/Mr.Pizza.png');
-        this.load.image('running', 'assets/running/cat.PNG');
-        this.load.image('store24', 'assets/store24/과자_포카칩.PNG')
+        this.load.image('blackjack', '/assets/blackjack/cardA.png');
+        this.load.image('pizza', '/assets/pizza/Mr.Pizza.png');
+        this.load.image('running', '/assets/running/cat.png');
+        this.load.image('store24', '/assets/store24/과자_포카칩.png')
 
 
-        this.load.spritesheet('mainCharacter','assets/main/mainCharacter.PNG', { frameWidth: 64, frameHeight: 64 }); //mainCharacter
+        this.load.spritesheet('mainCharacter','/assets/main/mainCharacter.png', { frameWidth: 64, frameHeight: 64 }); //mainCharacter
         //건물들
-        this.load.image('공원','assets/main/공원.PNG');
-        this.load.image('블랙잭','assets/main/블랙잭.PNG');
-        this.load.image('편의점','assets/main/편의점.PNG');
-        this.load.image('피자나라','assets/main/피자나라.PNG');
-        this.load.image('집','assets/main/집.PNG');
-        this.load.image('덤불0','assets/main/덤불0.PNG');
-        this.load.image('덤불1','assets/main/덤불1.PNG');
-        this.load.image('덤불2','assets/main/덤불2.PNG');
-        this.load.image('덤불3','assets/main/덤불3.PNG');
-        this.load.image('덤불4','assets/main/덤불4.PNG');
-        this.load.image('땅바닥','assets/main/흙바닥3.PNG');
-        this.load.image('글귀1','assets/main/글귀1.PNG');
-        this.load.image('글귀2','assets/main/글귀2.PNG');
-        this.load.image('글귀3','assets/main/글귀3.PNG');
-        this.load.image('글귀4','assets/main/글귀4.PNG');
-        this.load.image('글귀5','assets/main/글귀5.PNG');
-        this.load.image('글귀6','assets/main/글귀6.PNG');
-        this.load.image('글귀7','assets/main/글귀7.PNG');
-        this.load.image('글귀8','assets/main/글귀8.PNG');
-        this.load.image('글귀9','assets/main/글귀9.PNG');
-        this.load.image('글귀10','assets/main/글귀10.PNG');
+        this.load.image('공원','/assets/main/공원.png');
+        this.load.image('블랙잭','/assets/main/블랙잭.png');
+        this.load.image('편의점','/assets/main/편의점.png');
+        this.load.image('피자나라','/assets/main/피자나라.png');
+        this.load.image('집','/assets/main/집.png');
+        this.load.image('덤불0','/assets/main/덤불0.png');
+        this.load.image('덤불1','/assets/main/덤불1.png');
+        this.load.image('덤불2','/assets/main/덤불2.png');
+        this.load.image('덤불3','/assets/main/덤불3.png');
+        this.load.image('덤불4','/assets/main/덤불4.png');
+        this.load.image('땅바닥','/assets/main/흙바닥3.png');
+        this.load.image('글귀1','/assets/main/글귀1.png');
+        this.load.image('글귀2','/assets/main/글귀2.png');
+        this.load.image('글귀3','/assets/main/글귀3.png');
+        this.load.image('글귀4','/assets/main/글귀4.png');
+        this.load.image('글귀5','/assets/main/글귀5.png');
+        this.load.image('글귀6','/assets/main/글귀6.png');
+        this.load.image('글귀7','/assets/main/글귀7.png');
+        this.load.image('글귀8','/assets/main/글귀8.png');
+        this.load.image('글귀9','/assets/main/글귀9.png');
+        this.load.image('글귀10','/assets/main/글귀10.png');
 
-        this.load.bitmapFont('myfont', 'assets/main/font/font.png', 'assets/main/font/font.fnt');
+        this.load.bitmapFont('myfont', '/assets/main/font/font.png', '/assets/main/font/font.fnt');
 
-        this.load.image('okButton','assets/공통팝업창/확인버튼.PNG');
-        this.load.image('noButton','assets/공통팝업창/X_버튼.PNG');
+        this.load.image('okButton','/assets/공통팝업창/확인버튼.png');
+        this.load.image('noButton','/assets/공통팝업창/X_버튼.png');
 
-        this.load.image('런닝방법','assets/running/런닝런닝방법.PNG');
-        this.load.image('블랙잭방법','assets/blackjack/blackjack_tutorial.png')
-        this.load.image('편순이방법','assets/store24/편순이방법.png');
-        this.load.image('피자방법','assets/pizza/피자_방법.PNG');
+        this.load.image('런닝방법','/assets/running/런닝런닝방법.png');
+        this.load.image('블랙잭방법','/assets/blackjack/blackjack_tutorial.png')
+        this.load.image('편순이방법','/assets/store24/편순이방법.png');
+        this.load.image('피자방법','/assets/pizza/피자_방법.png');
 		//etc.
     }
 

@@ -124,9 +124,9 @@ class Store24 extends Phaser.Scene {
         this.load.image('미스', 'assets/store24/미스팝업.png');
 
         //결과 팝업창
-        this.load.image('버튼포함창','assets/공통팝업창/버튼포함창.PNG');
-        //this.load.image('결과팝업','assets/공통팝업창/편의점결과.PNG');
-        this.load.image('okbtn','/assets/공통팝업창/확인버튼.PNG');
+        this.load.image('버튼포함창','assets/공통팝업창/버튼포함창.png');
+        //this.load.image('결과팝업','assets/공통팝업창/편의점결과.png');
+        this.load.image('okbtn','/assets/공통팝업창/확인버튼.png');
     }
 
     
@@ -353,19 +353,11 @@ class Store24 extends Phaser.Scene {
         if(this.score%100==0){
             if(this.speed<0.5){
                 var temp=this.score/100;
-                this.speed=this.speed+temp*0.0001 //speed 클수록 빠름
-                this.상품간격= this.상품간격/temp*1000000;  //상품나오는 delay 작을수록 좋음
+                this.speed=this.speed+temp*0.0002 //speed 클수록 빠름
+                this.상품간격= this.상품간격*temp*0.00001;  //상품나오는 delay 작을수록 좋음
             }
         }
 
-        //리셋-combo 기준 수정
-        /*if(this.combo==0){
-            this.speed=Phaser.Math.GetSpeed(600, 물건속도);
-            this.상품간격=1000;
-        }
-        */
-        //this.speedText.setText(this.speed); //작을수록 빠름
-        
 
 
         //게임오버

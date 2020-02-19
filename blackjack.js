@@ -39,31 +39,31 @@ class BlackJack extends Phaser.Scene{
     preload() {
         this.add.image(768/2,512/2,'nowloading').setScale(0.4)
 
-        this.load.image('stop', 'assets/blackjack/stop.png');
-        this.load.image('go', 'assets/blackjack/go.png');
-        this.load.image('result','assets/blackjack/result.png')
+        this.load.image('stop', '/assets/blackjack/stop.png');
+        this.load.image('go', '/assets/blackjack/go.png');
+        this.load.image('result','/assets/blackjack/result.png')
 
-        this.load.image('card1', 'assets/blackjack/card1.png')
-        this.load.image('card2', 'assets/blackjack/card2.png')
-        this.load.image('card8', 'assets/blackjack/card8.png')
-        this.load.image('carda', 'assets/blackjack/cardA.png')
-        this.load.image('card3', 'assets/blackjack/card 3.png')
-        this.load.image('card4', 'assets/blackjack/card 4.png')
-        this.load.image('card5', 'assets/blackjack/card 5.png')
-        this.load.image('card6', 'assets/blackjack/card 6.png')
-        this.load.image('card7', 'assets/blackjack/card 7.png')
-        this.load.image('card9', 'assets/blackjack/card 9.png')
-        this.load.image('cardk', 'assets/blackjack/card k.png')
+        this.load.image('card1', '/assets/blackjack/card1.png')
+        this.load.image('card2', '/assets/blackjack/card2.png')
+        this.load.image('card8', '/assets/blackjack/card8.png')
+        this.load.image('carda', '/assets/blackjack/cardA.png')
+        this.load.image('card3', '/assets/blackjack/card 3.png')
+        this.load.image('card4', '/assets/blackjack/card 4.png')
+        this.load.image('card5', '/assets/blackjack/card 5.png')
+        this.load.image('card6', '/assets/blackjack/card 6.png')
+        this.load.image('card7', '/assets/blackjack/card 7.png')
+        this.load.image('card9', '/assets/blackjack/card 9.png')
+        this.load.image('cardk', '/assets/blackjack/card k.png')
 
-        this.load.image('bg_tile','assets/blackjack/bg_pattern4.png')
-        this.load.image('board','assets/blackjack/board.png')
-        this.load.image('cactus','assets/blackjack/cactus.png')
-        this.load.image('주인공','assets/blackjack/player (3).PNG')
-        this.load.image('dealerC','assets/blackjack/dealer (1).png')
+        this.load.image('bg_tile','/assets/blackjack/bg_pattern4.png')
+        this.load.image('board','/assets/blackjack/board.png')
+        this.load.image('cactus','/assets/blackjack/cactus.png')
+        this.load.image('주인공','/assets/blackjack/player (3).png')
+        this.load.image('dealerC','/assets/blackjack/dealer (1).png')
         
-        this.load.image('ending','assets/blackjack/버튼포함창.png')
-        this.load.image('ok','assets/blackjack/확인버튼.png')
-        this.load.bitmapFont('myfont', 'assets/main/font/font.png', 'assets/main/font/font.fnt');
+        this.load.image('ending','/assets/blackjack/버튼포함창.png')
+        this.load.image('ok','/assets/blackjack/확인버튼.png')
+        this.load.bitmapFont('myfont', '/assets/main/font/font.png', '/assets/main/font/font.fnt');
     }
     create() {
 
