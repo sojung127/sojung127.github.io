@@ -29,10 +29,11 @@ class Store24 extends Phaser.Scene {
         this.topcombo=0; //제일 높은 콤보
         this.bonustag=0; //all combo 해서 보너스 있나? 없으면0
         this.그만=0;
+        this.속도태그=0;
 
         this.총상품=0;
         this.상품간격= 900; //0.9초기준시작
-        this.할당량=100; //할당량 실수없이 끝내면 보너스 
+        this.할당량=60; //할당량 실수없이 끝내면 보너스 
 
         this.products; //group
         this.rand_product;//랜덤으로 뽑을 상품
@@ -197,7 +198,7 @@ class Store24 extends Phaser.Scene {
 
         //주기적으로 상품 생성하는 함수 호출
         this.timedEvent=this.time.addEvent({ delay: this.상품간격, callback:this.createProduct, callbackScope: this, loop: true }); 
-        this.speed = Phaser.Math.GetSpeed(600, this.물건속도);
+        this.speed = Phaser.Math.GetSpeed(768, this.물건속도);
 
 
         //키보드    ->function(event)와 (event) => 차이?무엇...
@@ -349,16 +350,16 @@ class Store24 extends Phaser.Scene {
             }
         }
 
-        //점수의 100배수마다 속도 점차 증가
-        if(this.score%100==0){
-            if(this.speed<0.5){
-                var temp=this.score/100;
-                this.speed=this.speed+temp*0.0002; //speed 클수록 빠름
-                this.상품간격= this.상품간격-1000;  //상품나오는 delay 작을수록 좋음
+        //점수의 100배수마다 속도 점차 증가 (10개마다)
+        if(this.score%100==0 && this.score !=0){
+            if(this.속도태그==0){
+                this.changeSpeed();
             }
         }
 
-
+        if(this.score%100!=0){
+            this.속도태그=0;
+        }
 
         //게임오버
         if (this.life == 0){
@@ -369,7 +370,16 @@ class Store24 extends Phaser.Scene {
 
         
     
-
+    changeSpeed(){
+        if(this.물건속도>=0.5&&this.상품간격>0){
+            var temp=this.score/100;
+            this.물건속도=this.물건속도-0.3;
+            this.speed=Phaser.Math.GetSpeed(768, this.물건속도);; //speed 클수록 빠름
+            this.상품간격= this.상품간격-100;  //상품나오는 delay 작을수록 좋음
+            this.timedEvent.delay=this.상품간격;
+            this.속도태그=1;
+        }
+    }
 
     pickProductList(){
         var tempindex=this.getRandomInt(0,this.productList.length); //상품종류선택 index이용
@@ -409,6 +419,7 @@ class Store24 extends Phaser.Scene {
         this.endpopup=this.add.image(0,0,'버튼포함창').setOrigin(0);
         
         //결과팝업text
+        this.inputList=[];
         this.endpopup_combo= this.add.text(320, 256, this.topcombo, { fontFamily: 'fantasy',fontSize: '40px', color: '#000'});
         this.endpopup_score= this.add.text(320, 192, this.score, { fontFamily: 'fantasy',fontSize: '40px', color: '#000'});
         this.endpopup_joy= this.add.text(384, 352, '', { fontFamily: 'fantasy',fontSize: '40px', color: '#000'});
@@ -460,15 +471,17 @@ class Store24 extends Phaser.Scene {
         this.combo=0;  //콤보변수
         this.topcombo=0; //제일 높은 콤보
         this.bonustag=0; //all combo 해서 보너스 있나? 없으면0
+        this.물건속도=3;
 
         this.총상품=0;
-        this.상품간격= 900; //0.9초기준시작
+        this.상품간격= 900; //1초기준시작
 
         //상품, 인풋 리스트 리셋
         this.rand_productList=[]; //뽑을 리스트 리셋
         this.inputList=[]; //랜덤상품고를때마다 눌러야할 키 넣기
 
         this.그만=0;
+        this.속도태그=0;
     }
 
 }
