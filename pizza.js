@@ -65,6 +65,8 @@ class Pizza extends Phaser.Scene {
     }
 
     preload() {
+        this.load.bitmapFont('myfont', 'assets/main/font/font.png', 'assets/main/font/font.fnt');
+
         this.add.image(768/2,512/2,'nowloading').setScale(0.4)
         this.load.image('aaaa','assets/pizza/흰색배경.png')
 
