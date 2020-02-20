@@ -88,7 +88,7 @@ class Pizza extends Phaser.Scene {
         this.load.image('life_gray','assets/pizza/회색하트.png');
         this.load.image('게임끝팝업','assets/pizza/피자게임끝.png');
         this.load.image('ok','assets/공통팝업창/확인버튼.png');
-        this.load.image('타일배경','assets/pizza/말풍선바탕2.png')
+        //this.load.image('타일배경','assets/pizza/말풍선바탕2.png')
         this.load.image('가운데타일','assets/pizza/eeee.png');
         this.load.image('aa','assets/pizza/cc.png');
         this.load.image('타임바','assets/pizza/타임바1.png');
