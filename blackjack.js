@@ -108,9 +108,9 @@ class BlackJack extends Phaser.Scene{
 
         
         this.button_stop = this.add.image(525, 275, 'stop', 0);
-        this.button_stop.scale = 0.125
+        this.button_stop.scale = 0.1
         this.button_go = this.add.image(525, 225, 'go', 0)
-        this.button_go.scale = 0.125
+        this.button_go.scale = 0.1
         this.cards = this.add.group();
 
         this.button_stop.setInteractive();
@@ -133,7 +133,7 @@ class BlackJack extends Phaser.Scene{
         this.button_result.setVisible(false)
 
         this.gameState = this.GAME_START
-        this.playText=this.add.bitmapText(300,225,'myfont','한판더?',48)
+        this.playText=this.add.bitmapText(200,225,'myfont','WIN!! 한판더?',36)
         this.playText.setVisible(false);
 
     }
@@ -254,6 +254,7 @@ class BlackJack extends Phaser.Scene{
         if (this.gameState == this.GAME_OVER) {
             this.button_go.setVisible(false)
             this.button_stop.setVisible(false)
+            this.playText.setX(300)
             if(this.money>0){
                 this.playText.setText('WIN!!')
             }else
@@ -267,11 +268,12 @@ class BlackJack extends Phaser.Scene{
             if (this.click_result) {
                 console.log('function')
                 this.add.image(0, 0, 'ending').setOrigin(0)
-                if (this.money > 0)
+                this.playText.setX(300)
+            if (this.money > 0)
                     this.add.bitmapText(370, 205, 'myfont', 'WIN', '34')
                 else
                     this.add.bitmapText(370, 210, 'myfont', 'LOSE', 34)
-                this.add.bitmapText(400, 260, 'myfont', '' + Math.abs(this.playNum) + '판', 34)
+                this.add.bitmapText(380, 260, 'myfont', '' + Math.abs(this.playNum) + '판', 34)
                 //175,360
                 this.add.bitmapText(175, 365, 'myfont', this.money, 38)
                 this.add.bitmapText(400, 365, 'myfont', this.playNum, 34)
