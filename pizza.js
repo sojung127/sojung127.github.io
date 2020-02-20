@@ -140,7 +140,7 @@ class Pizza extends Phaser.Scene {
         
         this.add.image(415,256,'가운데타일').setScale(1.3,1.3);
         //타이머 생성
-        this.timerEvent = this.time.addEvent({ delay: 7000 });
+        this.timerEvent = this.time.addEvent({ delay: 5000 });
         this.graphics = this.add.graphics({ x: 253, y: 115 });
         //this.graphics.angle = -90;
 
@@ -385,7 +385,7 @@ class Pizza extends Phaser.Scene {
 
         if (this.timeChange){
             this.timeChange=false;
-            this.timerEvent = this.time.addEvent({ delay: 7000 });
+            this.timerEvent = this.time.addEvent({ delay: 5000 });
         }
 
         if (this.life==0){
