@@ -713,7 +713,7 @@ class GameStart extends Phaser.Scene {
     preload() {
         this.load.image('욜로게임방식팝업','/assets/main/욜로게임방식팝업.png');
         this.load.image('욜로라이프타이틀','/assets/main/욜로라이프타이틀.png');
-        this.load.image('메인으로버튼','/assets/main/메인으로버튼.png');
+        this.load.image('스타트버튼','/assets/main/refresh.png');
         
    
     }
@@ -727,7 +727,7 @@ class GameStart extends Phaser.Scene {
     imageChange(){
         var image=this.add.image(384, 256, '욜로게임방식팝업');
         image.setScale(0.49);
-        this.mainButton=this.add.image(670, 480, '메인으로버튼');
+        this.mainButton=this.add.image(670, 480, '스타트버튼');
         this.mainButton.setScale(0.48);
         this.mainButton.setInteractive();
         this.mainButton.on('pointerdown', (event) => {
