@@ -62,7 +62,7 @@ class BlackJack extends Phaser.Scene{
         this.load.image('dealerC','/assets/blackjack/dealer (1).png')
         
         this.load.image('ending','/assets/blackjack/버튼포함창.png')
-        this.load.image('ok','/assets/blackjack/확인버튼.png')
+        this.load.image('ok_button','/assets/blackjack/확인버튼.png')
         this.load.bitmapFont('myfont', '/assets/main/font/font.png', '/assets/main/font/font.fnt');
     }
     create() {
@@ -91,6 +91,7 @@ class BlackJack extends Phaser.Scene{
 
         this.playNum=1;
         this.cardNum=0;
+        this.Aappear=false;
 
       
         
@@ -173,6 +174,7 @@ class BlackJack extends Phaser.Scene{
 
             if (this.click_stop) {
                 this.gameState = this.TURN_STOP
+                this.Aappear=false;
                 console.log(this.gameState)
                 // 딜러 카드 오픈
                 this.cardlocate = 768/2-512/2+10
@@ -211,6 +213,7 @@ class BlackJack extends Phaser.Scene{
                         break;
                     }
                 }
+                this.Aappear=false;
                 if (this.sum2 <= 21)
                     this.sum1 = this.sum2
                 if (this.dealerSum2 <= 21)
@@ -272,7 +275,7 @@ class BlackJack extends Phaser.Scene{
                 //175,360
                 this.add.bitmapText(175, 365, 'myfont', this.money, 38)
                 this.add.bitmapText(400, 365, 'myfont', this.playNum, 34)
-                var ok = this.add.image(565 + 112 / 2, 365 + 65 / 2, 'ok');
+                var ok = this.add.image(565 + 112 / 2, 365 + 65 / 2, 'ok_button');
                 ok.setInteractive();
                 ok.on('pointerdown', function (event) {
                     this.backToMain();
@@ -296,6 +299,12 @@ class BlackJack extends Phaser.Scene{
     random_card(who){
         var rand = Math.floor(Math.random() * (11)) + 1;
         var cardname;
+        while ((rand==1 || rand==11) && this.Aappear){
+            rand=Math.floor(Math.random()*10)+2;
+        }
+        if( (rand==1 || rand==11 ) && !this.Aappear){
+            this.Aappear=true;
+        }
         if (rand == 10)
             cardname = 'cardk'
         else if (rand == 11)
