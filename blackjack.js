@@ -108,9 +108,9 @@ class BlackJack extends Phaser.Scene{
 
         
         this.button_stop = this.add.image(525, 275, 'stop', 0);
-        this.button_stop.scale = 0.1
+        this.button_stop.scale = 0.125
         this.button_go = this.add.image(525, 225, 'go', 0)
-        this.button_go.scale = 0.1
+        this.button_go.scale = 0.125
         this.cards = this.add.group();
 
         this.button_stop.setInteractive();
