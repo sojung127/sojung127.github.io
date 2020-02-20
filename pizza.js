@@ -60,13 +60,10 @@ class Pizza extends Phaser.Scene {
         this.daedGroup;
         this.timeChange;
 
-        this.notice;
 
     }
 
     preload() {
-        this.load.bitmapFont('myfont', 'assets/main/font/font.png', 'assets/main/font/font.fnt');
-
         this.add.image(768/2,512/2,'nowloading').setScale(0.4)
         this.load.image('aaaa','assets/pizza/흰색배경.png')
 
@@ -314,7 +311,6 @@ class Pizza extends Phaser.Scene {
 
         });
 
-        this.notice=this.add.bitmapText(7*64,50,'myfont','화살표가 다 나온 후 입력하세요!',20);
     }
 
 
