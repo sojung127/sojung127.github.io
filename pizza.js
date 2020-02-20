@@ -60,6 +60,8 @@ class Pizza extends Phaser.Scene {
         this.daedGroup;
         this.timeChange;
 
+        this.notice;
+
     }
 
     preload() {
@@ -310,7 +312,7 @@ class Pizza extends Phaser.Scene {
 
         });
 
-
+        this.notice=this.add.bitmapText(7*64,50,'myfont','화살표가 다 나온 후 입력하세요!',20);
     }
 
 
