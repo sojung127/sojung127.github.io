@@ -1,5 +1,4 @@
 
-
 class Pizza extends Phaser.Scene {
 
     constructor() {
@@ -79,21 +78,15 @@ class Pizza extends Phaser.Scene {
         this.load.image('space', 'assets/pizza/space1.png');
         this.load.image('back1', 'assets/pizza/back1.png');
         this.load.image('back2', 'assets/pizza/back2_1.png');
-        this.load.image('back3', 'assets/pizza/back3.png');
         this.load.image('scoretext', 'assets/pizza/scoretext.png');
         this.load.image('box', 'assets/pizza/box.png');
         this.load.image('player','assets/pizza/pizza_player.png')
-        //this.load.image('timeBar','assets/pizza/timeBar.png')
         this.load.image('life_pink','assets/pizza/분홍하트.png');
         this.load.image('life_gray','assets/pizza/회색하트.png');
         this.load.image('게임끝팝업','assets/pizza/피자게임끝.png');
         this.load.image('ok','assets/공통팝업창/확인버튼.png');
-        this.load.image('타일배경','assets/pizza/말풍선바탕2.png')
         this.load.image('가운데타일','assets/pizza/eeee.png');
-        this.load.image('aa','assets/pizza/cc.png');
-        this.load.image('타임바','assets/pizza/타임바1.png');
-        this.load.image('타임바_위','assets/pizza/타임바2.png');
-        this.load.image('타임바_아래','assets/pizza/타임바3.png');
+        
         this.load.bitmapFont('myfont', 'assets/main/font/font.png', 'assets/main/font/font.fnt');
 
     }
@@ -137,19 +130,11 @@ class Pizza extends Phaser.Scene {
 
 
         
-        //this.add.image(384,256,'타일배경')//.setScale(,3);
         
         this.add.image(415,256,'가운데타일').setScale(1.3,1.3);
         //타이머 생성
         this.timerEvent = this.time.addEvent({ delay: 5000 });
         this.graphics = this.add.graphics({ x: 253, y: 115 });
-        //this.graphics.angle = -90;
-
-        
-
-        
-
-
 
         //캐릭터
         this.player = this.add.image(668,400,'player').setScale(0.2,0.2);
@@ -172,33 +157,14 @@ class Pizza extends Phaser.Scene {
         this.schoolGroup = this.add.group();
         this.boxGroup = this.add.group();
 
-        this.ThisArrow=this.add.image(264,175,'aa').setScale(1.2,1.2).setVisible(false);
-
+        
         //피자마다 방향키 패턴 생성
         this.childMaking(this.dominoGroup, this.dominoSequence);
         this.childMaking(this.mrGroup, this.mrSequence);
         this.childMaking(this.hutGroup, this.hutSequence);
         this.childMaking(this.schoolGroup, this.schoolSequence);
 
-        this.arrowGroup=this.add.group();
-        for(var i=0;i<11;i++){
-            var temp=this.add.image(0,0,'aa').setScale(1.2,1.2).setVisible(false);
-            var x = 264;
-            var y = 175;
-            if (i < 3) {
-                temp.setX(x);
-                temp.setY(y + i * 60);
-            }
-            else if (i > 7) {
-                temp.setX(x + 4 * 60);
-                temp.setY(y + (10 - i) * 60);
-            }
-            else {
-                temp.setX(x + (i - 3) * 60);
-                temp.setY(y + 3 * 60);
-            }
-            this.arrowGroup.add(temp);
-        }
+        
         
 
         //피자박스 몇개나 접었는지 
