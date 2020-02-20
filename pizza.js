@@ -60,6 +60,7 @@ class Pizza extends Phaser.Scene {
         this.daedGroup;
         this.timeChange;
 
+
     }
 
     preload() {
@@ -310,7 +311,6 @@ class Pizza extends Phaser.Scene {
 
         });
 
-
     }
 
 
@@ -347,6 +347,7 @@ class Pizza extends Phaser.Scene {
                 this.timeflag=1;
                 this.pizzaflag=1;
                 this.arrowflag=1;
+                this.si=0;
                 this.wrongEvent();
             }
             if (this.wrongflag == 0) {

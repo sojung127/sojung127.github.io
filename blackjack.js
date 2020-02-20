@@ -62,7 +62,7 @@ class BlackJack extends Phaser.Scene{
         this.load.image('dealerC','/assets/blackjack/dealer (1).png')
         
         this.load.image('ending','/assets/blackjack/버튼포함창.png')
-        this.load.image('ok','/assets/blackjack/확인버튼.png')
+        this.load.image('ok_button','/assets/blackjack/확인버튼.png')
         this.load.bitmapFont('myfont', '/assets/main/font/font.png', '/assets/main/font/font.fnt');
     }
     create() {
@@ -91,6 +91,7 @@ class BlackJack extends Phaser.Scene{
 
         this.playNum=1;
         this.cardNum=0;
+        this.Aappear=false;
 
       
         
@@ -132,7 +133,7 @@ class BlackJack extends Phaser.Scene{
         this.button_result.setVisible(false)
 
         this.gameState = this.GAME_START
-        this.playText=this.add.bitmapText(300,225,'myfont','한판더?',48)
+        this.playText=this.add.bitmapText(200,225,'myfont','WIN!! 한판더?',36)
         this.playText.setVisible(false);
 
     }
@@ -173,6 +174,7 @@ class BlackJack extends Phaser.Scene{
 
             if (this.click_stop) {
                 this.gameState = this.TURN_STOP
+                this.Aappear=false;
                 console.log(this.gameState)
                 // 딜러 카드 오픈
                 this.cardlocate = 768/2-512/2+10
@@ -211,6 +213,7 @@ class BlackJack extends Phaser.Scene{
                         break;
                     }
                 }
+                this.Aappear=false;
                 if (this.sum2 <= 21)
                     this.sum1 = this.sum2
                 if (this.dealerSum2 <= 21)
@@ -251,6 +254,7 @@ class BlackJack extends Phaser.Scene{
         if (this.gameState == this.GAME_OVER) {
             this.button_go.setVisible(false)
             this.button_stop.setVisible(false)
+            this.playText.setX(300)
             if(this.money>0){
                 this.playText.setText('WIN!!')
             }else
@@ -264,15 +268,16 @@ class BlackJack extends Phaser.Scene{
             if (this.click_result) {
                 console.log('function')
                 this.add.image(0, 0, 'ending').setOrigin(0)
-                if (this.money > 0)
+                this.playText.setX(300)
+            if (this.money > 0)
                     this.add.bitmapText(370, 205, 'myfont', 'WIN', '34')
                 else
                     this.add.bitmapText(370, 210, 'myfont', 'LOSE', 34)
-                this.add.bitmapText(400, 260, 'myfont', '' + Math.abs(this.playNum) + '판', 34)
+                this.add.bitmapText(380, 260, 'myfont', '' + Math.abs(this.playNum) + '판', 34)
                 //175,360
                 this.add.bitmapText(175, 365, 'myfont', this.money, 38)
                 this.add.bitmapText(400, 365, 'myfont', this.playNum, 34)
-                var ok = this.add.image(565 + 112 / 2, 365 + 65 / 2, 'ok');
+                var ok = this.add.image(565 + 112 / 2, 365 + 65 / 2, 'ok_button');
                 ok.setInteractive();
                 ok.on('pointerdown', function (event) {
                     this.backToMain();
@@ -296,6 +301,12 @@ class BlackJack extends Phaser.Scene{
     random_card(who){
         var rand = Math.floor(Math.random() * (11)) + 1;
         var cardname;
+        while ((rand==1 || rand==11) && this.Aappear){
+            rand=Math.floor(Math.random()*10)+2;
+        }
+        if( (rand==1 || rand==11 ) && !this.Aappear){
+            this.Aappear=true;
+        }
         if (rand == 10)
             cardname = 'cardk'
         else if (rand == 11)
