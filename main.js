@@ -686,6 +686,22 @@ class GameOver extends Phaser.Scene {
 
         }
 
+        this.button=this.add.image(600, 110,'다시시작버튼').setInteractive().setScale(0.48);
+        this.button.on('pointerdown', (event) => {
+            date = 30; //30일부터 1일 까지 0이면 게임 엔딩
+            joy = 5; //즐거움 1~10일 까지 0이면 게임 오버
+            money = 50000; //돈 10000원에서 시작 0이면 게임 오버 -> 1초당 1000원씩 감소
+            ending = 0; //ending이 1이면 게임오버, ending이 2이면 엔딩씬
+
+            playNum = new Array(0, 0, 0, 0);
+            // 0 공원 1 블랙잭 2 피자나라 3 편의점 
+            minigame_start = 0;
+            music.stop();
+            music = null;
+            this.scene.restart('Main');
+            this.scene.switch('Main');
+        });
+
     }
 }
 
