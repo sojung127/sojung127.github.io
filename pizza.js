@@ -156,7 +156,7 @@ class Pizza extends Phaser.Scene {
 
         //피자그룹 생성
         this.domino = this.add.image(384, 240, 'Domino').setScale(0.75, 0.75);
-        this.mr = this.add.image(384, 240, 'Mr').setScale(0.6,0.6);
+        this.mr = this.add.image(384, 240, 'Mr').setScale(0.55,0.55);
         this.hut = this.add.image(384, 240, 'Hut').setScale(0.75, 0.75);
         this.school = this.add.image(384, 240, 'School').setScale(0.75, 0.75);
 
@@ -328,19 +328,26 @@ class Pizza extends Phaser.Scene {
             this.arrowflag = 1;
             //패턴 틀린거면 0.5초 지연
             if (this.isWrong == true) {
+                this.pizzaflag=1;
                 this.arrowflag=1;
                 this.isWrong = false;
+                this.life-=1;
                 this.lifeDown();
                 this.wrongDelay = this.time.addEvent({ delay: 500, callback: this.wrongEvent, callbackScope: this });
             }
             //패턴 맞춘거면 완성된 박스 하나 생성
             if (this.boxflag == 0) {
-                this.life+=1;
                 this.timeChange=true;
                 this.boxflag = 1;
                 var BOX = this.add.image(this.boxX, this.boxY - 10 * this.boxNum, 'box').setScale(0.7, 0.7);
                 BOX.visible = true;
                 this.boxtext.setText('X ' + this.boxNum);
+            }
+            if (this.timeflag==0){
+                this.timeflag=1;
+                this.pizzaflag=1;
+                this.arrowflag=1;
+                this.wrongEvent();
             }
             if (this.wrongflag == 0) {
                 this.pizzaflag = 1;
@@ -367,12 +374,18 @@ class Pizza extends Phaser.Scene {
         else {
             this.graphics.fillRect(0, 0, this.timeSource, 30);
         }
-        if (this.timeChange || (1 - this.timerEvent.getProgress()) == 0) {
+        if ((1 - this.timerEvent.getProgress()) == 0) {
+            this.timeflag=0;
+            this.timeChange=true;
+            this.wrongflag=1;
             this.life-=1;
+            this.lifeDown();
+            this.pizzaflag=0;
+        }
+
+        if (this.timeChange){
             this.timeChange=false;
             this.timerEvent = this.time.addEvent({ delay: 7000 });
-
-
         }
 
         if (this.life==0){
@@ -387,9 +400,9 @@ class Pizza extends Phaser.Scene {
     {
         this.endPopup.visible=true;
         this.OKbutton.visible=true;
-        this.pizzaText=this.add.bitmapText(420, 220, 'myfont',this.boxNum+'판',35 );
-        this.moneyTExt=this.add.bitmapText(370, 280, 'myfont',this.boxNum*1000,35 );
-        this.joyText=this.add.bitmapText(370, 340, 'myfont','-2',35 );
+        this.pizzaText=this.add.bitmapText(410, 220, 'myfont',this.boxNum+' 판',35 );
+        this.moneyTExt=this.add.bitmapText(250, 340, 'myfont',this.boxNum*1000,35 );
+        this.joyText=this.add.bitmapText(410, 340, 'myfont','-2',35 );
         
     }
 
@@ -425,6 +438,7 @@ class Pizza extends Phaser.Scene {
         this.wrongflag = 0; //틀렸을때 잠시 지연
         this.life=3;
         this.timeChange=false;
+        this.timeflag=1;
     }
 
     //새로운 피자박스 불러오는 함수
@@ -443,7 +457,9 @@ class Pizza extends Phaser.Scene {
     }
     //틀려서 재배치될때 나와있던 피자박스 들여보내는 함수 
     wrongEvent() {
+        
         this.timeChange=true;
+        
         
         if (this.pizza == 1) {
             this.resetting(this.domino, this.dominoGroup);
@@ -458,6 +474,7 @@ class Pizza extends Phaser.Scene {
             this.resetting(this.school, this.schoolGroup);
         }
         this.wrongflag = 0;
+        this.pizzaflag=0;
 
     }
 
