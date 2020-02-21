@@ -53,7 +53,7 @@ class BlackJack extends Phaser.Scene{
         this.load.image('card6', '/assets/blackjack/card 6.png')
         this.load.image('card7', '/assets/blackjack/card 7.png')
         this.load.image('card9', '/assets/blackjack/card 9.png')
-        this.load.image('cardk', '/assets/blackjack/card k.png')
+        this.load.image('cardk', '/assets/blackjack/card10.png')
 
         this.load.image('bg_tile','/assets/blackjack/bg_pattern4.png')
         this.load.image('board','/assets/blackjack/board.png')
@@ -64,6 +64,7 @@ class BlackJack extends Phaser.Scene{
         this.load.image('ending','/assets/blackjack/버튼포함창.png')
         this.load.image('ok_button','/assets/blackjack/확인버튼.png')
         this.load.bitmapFont('myfont', '/assets/main/font/font.png', '/assets/main/font/font.fnt');
+        this.load.bitmapFont('whitefont', '/assets/main/white/white.png', '/assets/main/white/white.fnt');
     }
     create() {
 
@@ -133,8 +134,10 @@ class BlackJack extends Phaser.Scene{
         this.button_result.setVisible(false)
 
         this.gameState = this.GAME_START
-        this.playText=this.add.bitmapText(200,225,'myfont','WIN!! 한판더?',36)
+        this.playText=this.add.bitmapText(250,225,'whitefont','WIN!! 한판더?',36)
         this.playText.setVisible(false);
+        this.remainCard=this.add.bitmapText(400,230,'whitefont','남은카드:'+(8-this.cardNum)+"장",15)
+        this.moneyText=this.add.bitmapText(400,270,'whitefont','MONEY:'+Math.abs(this.money),15)
 
     }
     
@@ -142,7 +145,30 @@ class BlackJack extends Phaser.Scene{
         var rand;
         var card;
         if (this.gameState == this.GAME_START) {
+            if(this.cardNum==0){
+                this.remainCard.setVisible(true)
+                var cardname = this.random_card(this.PLAYER);
+                this.cardNum+=1;
+                var cardY=410;
+                card = this.add.image(this.cardlocate, cardY, cardname, 0);
+                this.cards.add(card)
+                card.scale = 0.2
+                var cardY=100;
+
+                var temp=this.cardlocate
+                cardname = this.random_card(this.DEALER);
+                //this.cardNum += 1;
+                this.cardlocate = 768/2-512/2+10+75
+                
+                card = this.add.image(this.cardlocate, cardY, cardname, 0);
+                this.cards.add(card)
+                card.scale = 0.2
+
+                this.cardlocate=temp
+            }
         if (this.click_go) {  // 클릭 시 카드 추가
+                this.remainCard.setText('남은카드:'+(8-this.cardNum)+"장")
+
                 var cardname = this.random_card(this.PLAYER);
                 this.cardNum+=1;
                 var cardY=410;
@@ -177,8 +203,8 @@ class BlackJack extends Phaser.Scene{
                 this.Aappear=false;
                 console.log(this.gameState)
                 // 딜러 카드 오픈
-                this.cardlocate = 768/2-512/2+10
-                this.cardNum=0;
+                this.cardlocate = 768/2-512/2+10+75
+                this.cardNum=1;
                 var cardY=100;
                 while (this.dealerSum1 <=11 && this.cardNum<8) {
                     var cardname = this.random_card(this.DEALER);
@@ -229,7 +255,9 @@ class BlackJack extends Phaser.Scene{
                     }
                     this.gameState = this.GAME_OVER
                 }
+                this.moneyText.setText('MONEY:'+Math.abs(this.money))
                 this.click_stop = false
+                this.remainCard.setVisible(false)
             }
         }
         if (this.gameState == this.TURN_STOP && this.playNum<5) {
@@ -243,6 +271,7 @@ class BlackJack extends Phaser.Scene{
                 this.click_go = false
                 this.gameState = this.GAME_START
                 this.money *= 2
+                this.moneyText.setText('MONEY:'+Math.abs(this.money))
             }
             if (this.click_stop) {
                 this.click_stop = false
@@ -252,9 +281,11 @@ class BlackJack extends Phaser.Scene{
             this.gameState=this.GAME_OVER
         }
         if (this.gameState == this.GAME_OVER) {
+                this.remainCard.setVisible(false)
+                this.moneyText.setVisible(false)
             this.button_go.setVisible(false)
             this.button_stop.setVisible(false)
-            this.playText.setX(300)
+            this.playText.setX(250)
             if(this.money>0){
                 this.playText.setText('WIN!!')
             }else
