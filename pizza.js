@@ -352,8 +352,8 @@ class Pizza extends Phaser.Scene {
 
         if (this.timeChange){
             this.timeChange=false;
-            if (boxNum<30){
-                this.timerEvent = this.time.addEvent({ delay: 7000-boxNum*150 });
+            if (this.boxNum<30){
+                this.timerEvent = this.time.addEvent({ delay: 7000-this.boxNum*150 });
             }
             else{
                 this.timerEvent = this.time.addEvent({ delay: 2000 });
