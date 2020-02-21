@@ -58,6 +58,7 @@ class Pizza extends Phaser.Scene {
         this.lifeGroup;
         this.daedGroup;
         this.timeChange;
+        this.timeStart;
 
 
     }
@@ -350,7 +351,8 @@ class Pizza extends Phaser.Scene {
             this.pizzaflag=0;
         }
 
-        if (this.timeChange){
+        if (this.timeChange && this.timeStart){
+            this.timeStart=false;
             this.timeChange=false;
             if (this.boxNum<30){
                 this.timerEvent = this.time.addEvent({ delay: 7000-this.boxNum*150 });
@@ -411,6 +413,7 @@ class Pizza extends Phaser.Scene {
         this.life=3;
         this.timeChange=false;
         this.timeflag=1;
+        this.timeStart=true;
     }
 
     //새로운 피자박스 불러오는 함수
@@ -465,6 +468,7 @@ class Pizza extends Phaser.Scene {
             {
                 this.arrowflag_flag = 0;
                 this.ai = 0;
+                this.timeStart=true;
             }
         });
 
