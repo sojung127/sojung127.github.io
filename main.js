@@ -699,7 +699,7 @@ class GameOver extends Phaser.Scene {
             music.stop();
             music = null;
             this.scene.restart('Main');
-            this.scene.switch('Main');
+            this.scene.switch('GameStart');
         });
 
     }
