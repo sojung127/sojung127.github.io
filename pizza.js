@@ -327,7 +327,12 @@ class Pizza extends Phaser.Scene {
                     case 3: this.add.image(708, 60, 'Hut').setScale(0.5, 0.5); break;
                     case 4: this.add.image(708, 60, 'School').setScale(0.5, 0.5); break;
                 }*/
-                this.arrowdelay = this.time.addEvent({ delay: 100, callback: this.onEvent, callbackScope: this, repeat: 10 });
+                if (this.boxNum<30){
+                    this.arrowdelay = this.time.addEvent({ delay: 100-this.boxNum*2, callback: this.onEvent, callbackScope: this, repeat: 10 });
+                }
+                else{
+                    this.arrowdelay = this.time.addEvent({ delay: 40, callback: this.onEvent, callbackScope: this, repeat: 10 });
+                }
 
             }
         }
