@@ -177,7 +177,7 @@ class Running extends Phaser.Scene{
         this.sprite.play('walk');
 
         /*타임바 */
-        this.timerEvent = this.time.addEvent({ delay: 30000 });
+        this.timerEvent = this.time.addEvent({ delay: 7000 });
         this.timebar = this.add.graphics({ x: 0, y: 0 });
 
         //  Input Events
